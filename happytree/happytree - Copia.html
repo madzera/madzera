@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HappyTree API - A Java API designed for handling objects in a tree structure">
+    <meta name="keywords" content="HappyTree, Java, Tree Structure, API, Data Structure">
+    <meta name="author" content="Diego Madson de Andrade Nóbrega">
+    <title>HappyTree API - Java Tree Structure Management</title>
+    <link rel="stylesheet" href="happytree_styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <img src="https://raw.githubusercontent.com/madzera/happytree/main/.github/resources/happytree_logo.png" alt="HappyTree Logo" class="logo">
+                <span class="brand-name">HappyTree</span>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#features" class="nav-link">Features</a></li>
+                <li><a href="#usage" class="nav-link">Usage</a></li>
+                <li><a href="#installation" class="nav-link">Installation</a></li>
+                <li><a href="#documentation" class="nav-link">Docs</a></li>
+                <li><a href="https://github.com/madzera/happytree" target="_blank" class="nav-link github-link">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="gradient-text">HappyTree API</span>
+                </h1>
+                <p class="hero-subtitle">
+                    A Java API designed for handling objects with tree-like behavior
+                </p>
+                <p class="hero-description">
+                    Transform linear Java objects into hierarchical tree structures. 
+                    Add, remove, cut, copy, and export to JSON/XML with ease.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#installation" class="btn btn-primary">Get Started</a>
+                    <a href="https://github.com/madzera/happytree" target="_blank" class="btn btn-secondary">View on GitHub</a>
+                </div>
+                <div class="badges">
+                    <img src="https://img.shields.io/github/license/madzera/happytree" alt="License">
+                    <img src="https://github.com/madzera/happytree/workflows/Build/badge.svg" alt="Build Status">
+                    <img src="https://sonarcloud.io/api/project_badges/measure?project=madzera_happytree&metric=alert_status" alt="Quality">
+                    <img src="https://img.shields.io/github/v/release/madzera/happytree" alt="Release">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about">
+        <div class="container">
+            <h2 class="section-title">What is HappyTree?</h2>
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="icon">🌳</div>
+                    <h3>Tree Structure API</h3>
+                    <p>
+                        HappyTree is a data structure API designed for handling Java objects that have 
+                        tree-like behavior, where an <code>@Id</code> attribute is referenced as a 
+                        <code>@Parent</code> attribute of its children.
+                    </p>
+                </div>
+                <div class="about-card">
+                    <div class="icon">🔄</div>
+                    <h3>Transformation Process</h3>
+                    <p>
+                        Transform collections of plain Java objects into actual hierarchical tree structures 
+                        in memory, where each object is wrapped into a tree node called <strong>Element</strong>.
+                    </p>
+                </div>
+                <div class="about-card">
+                    <div class="icon">⚡</div>
+                    <h3>Powerful Operations</h3>
+                    <p>
+                        Perform operations like adding/removing children, moving nodes, copying to other trees, 
+                        and converting structures to JSON/XML formats.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section features">
+        <div class="container">
+            <h2 class="section-title">Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📦</div>
+                    <h3>Object Management</h3>
+                    <p>Handle Java objects as tree nodes with operations like copying, cutting, removing, creating, and updating.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔗</div>
+                    <h3>Linear to Tree</h3>
+                    <p>Transform linear data structures with tree-like relationships into actual hierarchical trees.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✨</div>
+                    <h3>Create from Scratch</h3>
+                    <p>Build new trees from scratch, adding elements one by one to create custom structures.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3>JSON/XML Export</h3>
+                    <p>Convert your tree structures to JSON or XML format for easy serialization and data exchange.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Type Safety</h3>
+                    <p>Generic-based API with full type safety and compile-time checking for your domain objects.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛠️</div>
+                    <h3>Easy Integration</h3>
+                    <p>Simple annotation-based configuration with Maven/Gradle support and minimal setup required.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section class="section use-cases">
+        <div class="container">
+            <h2 class="section-title">Perfect For</h2>
+            <div class="use-cases-grid">
+                <div class="use-case">
+                    <span class="use-case-icon">📁</span>
+                    <span>Directory Structures</span>
+                </div>
+                <div class="use-case">
+                    <span class="use-case-icon">🏢</span>
+                    <span>Organizational Charts</span>
+                </div>
+                <div class="use-case">
+                    <span class="use-case-icon">🖥️</span>
+                    <span>UI Component Trees</span>
+                </div>
+                <div class="use-case">
+                    <span class="use-case-icon">🛍️</span>
+                    <span>Product Categories</span>
+                </div>
+                <div class="use-case">
+                    <span class="use-case-icon">💬</span>
+                    <span>Comment/Reply Systems</span>
+                </div>
+                <div class="use-case">
+                    <span class="use-case-icon">🗺️</span>
+                    <span>Menu Navigation</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Usage Section -->
+    <section id="usage" class="section usage">
+        <div class="container">
+            <h2 class="section-title">How to Use</h2>
+            
+            <div class="usage-step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Annotate Your Class</h3>
+                    <p>Add the required annotations to your Java class:</p>
+                    <div class="code-block">
+                        <pre><code class="language-java">@Tree
+public class Directory {
+    @Id
+    private Integer directoryId;
+    
+    @Parent
+    private Integer directoryParentId;
+    
+    private String directoryName;
+    
+    // Getters and setters
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="usage-step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Initialize a Session</h3>
+                    <p>Create a tree from an existing collection:</p>
+                    <div class="code-block">
+                        <pre><code class="language-java">// From existing collection
+Collection&lt;Directory&gt; directories = getDirectories();
+
+TreeManager manager = HappyTree.createTreeManager();
+TreeTransaction transaction = manager.getTransaction();
+transaction.initializeSession("myTree", directories);
+
+// Or create an empty tree
+transaction.initializeSession("emptyTree", Directory.class);</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="usage-step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Handle Your Tree</h3>
+                    <p>Perform operations on your tree elements:</p>
+                    <div class="code-block">
+                        <pre><code class="language-java">// Get elements
+Element&lt;Directory&gt; admin = manager.getElementById(adminId);
+Element&lt;Directory&gt; accessControl = manager.getElementById(accessId);
+
+// Move elements
+manager.cut(accessControl, admin);
+
+// Create new elements
+Directory security = new Directory();
+security.setDirectoryId(securityId);
+security.setDirectoryParentId(adminId);
+
+Element&lt;Directory&gt; securityElement = 
+    manager.createElement(securityId, adminId, security);
+securityElement = manager.persistElement(securityElement);
+
+// Export to JSON
+Element&lt;Directory&gt; root = manager.root();
+System.out.println(root.toJSON());</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation Section -->
+    <section id="installation" class="section installation">
+        <div class="container">
+            <h2 class="section-title">Installation</h2>
+            <div class="installation-grid">
+                <div class="installation-card">
+                    <h3>
+                        <img src="https://maven.apache.org/images/maven-logo-black-on-white.png" alt="Maven" class="package-logo">
+                        Maven
+                    </h3>
+                    <p>Add to your <code>pom.xml</code>:</p>
+                    <div class="code-block">
+                        <pre><code class="language-xml">&lt;dependency&gt;
+    &lt;groupId&gt;com.madzera&lt;/groupId&gt;
+    &lt;artifactId&gt;happytree&lt;/artifactId&gt;
+    &lt;version&gt;2.0.0&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+                    </div>
+                </div>
+                <div class="installation-card">
+                    <h3>
+                        <img src="https://gradle.org/images/gradle-knowledge-graph-logo.png" alt="Gradle" class="package-logo">
+                        Gradle
+                    </h3>
+                    <p>Add to your <code>build.gradle</code>:</p>
+                    <div class="code-block">
+                        <pre><code class="language-gradle">implementation 'com.madzera:happytree:2.0.0'</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="version-note">
+                <strong>⚠️ Note for v1.0.0 users:</strong>
+                <p>The <code>groupId</code> has changed from <code>com.madzera.happytree</code> to <code>com.madzera</code> in version 2.0.0</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documentation Section -->
+    <section id="documentation" class="section documentation">
+        <div class="container">
+            <h2 class="section-title">Documentation & Resources</h2>
+            <div class="docs-grid">
+                <a href="https://happytreeapi.vercel.app/happytree-2.0.0.pdf" target="_blank" class="doc-card">
+                    <div class="doc-icon">📄</div>
+                    <h3>Official Documentation</h3>
+                    <p>Complete API reference and detailed guides</p>
+                </a>
+                <a href="https://github.com/madzera/happytree" target="_blank" class="doc-card">
+                    <div class="doc-icon">💻</div>
+                    <h3>GitHub Repository</h3>
+                    <p>Source code, issues, and contributions</p>
+                </a>
+                <a href="https://github.com/madzera/happytree/wiki" target="_blank" class="doc-card">
+                    <div class="doc-icon">📚</div>
+                    <h3>Wiki</h3>
+                    <p>Tutorials, examples, and best practices</p>
+                </a>
+                <a href="../target/reports/apidocs/index.html" class="doc-card">
+                    <div class="doc-icon">🔍</div>
+                    <h3>JavaDoc</h3>
+                    <p>Detailed API documentation</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Code Example Section -->
+    <section class="section code-example">
+        <div class="container">
+            <h2 class="section-title">Complete Example</h2>
+            <div class="example-tabs">
+                <button class="tab-button active" data-tab="complete">Full Example</button>
+                <button class="tab-button" data-tab="operations">Operations</button>
+                <button class="tab-button" data-tab="export">Export</button>
+            </div>
+            <div class="tab-content active" id="complete">
+                <div class="code-block">
+                    <pre><code class="language-java">// 1. Define your model
+@Tree
+public class Directory {
+    @Id
+    private Integer directoryId;
+    @Parent
+    private Integer directoryParentId;
+	
+    private String directoryName;
+    
+    // Constructors, getters, setters...
+}
+
+// 2. Create some data
+List&lt;Directory&gt; directories = Arrays.asList(
+    new Directory(1, null, "Root"),
+    new Directory(2, 1, "Documents"),
+    new Directory(3, 1, "Pictures"),
+    new Directory(4, 2, "Work"),
+    new Directory(5, 2, "Personal")
+);
+
+// 3. Initialize the tree
+TreeManager manager = HappyTree.createTreeManager();
+TreeTransaction transaction = manager.getTransaction();
+transaction.initializeSession("fileSystem", directories);
+
+// 4. Work with the tree
+Element&lt;Directory&gt; documents = manager.getElementById(2);
+Element&lt;Directory&gt; pictures = manager.getElementById(3);
+
+// Move 'Personal' under 'Pictures'
+Element&lt;Directory&gt; personal = manager.getElementById(5);
+manager.cut(personal, pictures);
+
+// 5. Export the result
+Element&lt;Directory&gt; root = manager.root();
+String json = root.toJSON();
+System.out.println(json);</code></pre>
+                </div>
+            </div>
+            <div class="tab-content" id="operations">
+                <div class="code-block">
+                    <pre><code class="language-java">// Common tree operations
+
+// Get elements
+Element&lt;Directory&gt; element = manager.getElementById(id);
+Element&lt;Directory&gt; root = manager.root();
+
+// Check relationships
+boolean contains = manager.containsElement(parent, child);
+boolean isParent = manager.isParent(parent, child);
+
+// Modify tree structure
+manager.cut(source, destination);      // Move element
+manager.copy(source, destination);     // Copy element
+manager.removeElement(element);        // Remove element
+
+// Create and add new elements
+Element&lt;Directory&gt; newElement = 
+    manager.createElement(id, parentId, directory);
+manager.persistElement(newElement);
+
+// Update existing elements
+directory.setDirectoryName("New Name");
+manager.updateElement(element);</code></pre>
+                </div>
+            </div>
+            <div class="tab-content" id="export">
+                <div class="code-block">
+                    <pre><code class="language-java">// Export tree to different formats
+
+// Get the root or any element
+Element&lt;Directory&gt; root = manager.root();
+
+// Export to JSON
+String json = root.toJSON();
+System.out.println(json);
+
+// Export to XML (if supported)
+// Note: Check documentation for XML export options
+
+// Custom serialization
+// You can unwrap elements to access original objects
+Directory originalObject = root.unwrap();
+
+// Iterate through children
+Collection&lt;Element&lt;Directory&gt;&gt; children = root.getChildren();
+for (Element&lt;Directory&gt; child : children) {
+    Directory dir = child.unwrap();
+    System.out.println(dir.getDirectoryName());
+}</code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="section stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">2.0.0</div>
+                    <div class="stat-label">Latest Version</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">Java 8+</div>
+                    <div class="stat-label">Compatibility</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">MIT</div>
+                    <div class="stat-label">License</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">A+</div>
+                    <div class="stat-label">Code Quality</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contributing Section -->
+    <section class="section contributing">
+        <div class="container">
+            <h2 class="section-title">Contributing</h2>
+            <div class="contributing-content">
+                <p class="contributing-text">
+                    We welcome contributions! Whether it's bug reports, feature requests, 
+                    documentation improvements, or code contributions, your help is appreciated.
+                </p>
+                <div class="contributing-links">
+                    <a href="https://github.com/madzera/happytree/issues" target="_blank" class="btn btn-secondary">Report Issues</a>
+                    <a href="https://github.com/madzera/happytree/wiki" target="_blank" class="btn btn-secondary">Read Wiki</a>
+                    <a href="https://github.com/madzera/happytree/blob/main/CONTRIBUTING.md" target="_blank" class="btn btn-secondary">Contributing Guide</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>HappyTree API</h3>
+                    <p>A Java API for tree structure management</p>
+                    <p class="copyright">© 2026 Diego Madson de Andrade Nóbrega</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Links</h4>
+                    <ul>
+                        <li><a href="https://github.com/madzera/happytree">GitHub</a></li>
+                        <li><a href="https://happytreeapi.vercel.app/happytree-2.0.0.pdf">Documentation</a></li>
+                        <li><a href="https://github.com/madzera/happytree/wiki">Wiki</a></li>
+                        <li><a href="https://github.com/madzera/happytree/issues">Issues</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="https://sonarcloud.io/dashboard?id=madzera_happytree">Code Quality</a></li>
+                        <li><a href="https://github.com/madzera/happytree/releases">Releases</a></li>
+                        <li><a href="https://mvnrepository.com/artifact/com.madzera/happytree">Maven Central</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="http://www.madzera.com">MadZera</a></li>
+                        <li><a href="mailto:diegomadson@msn.com">Email</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="happytree_script.js"></script>
+</body>
+</html>
