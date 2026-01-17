@@ -12,12 +12,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 </head>
-<body>
+<body onload="addCopyButtons();">
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">
-                <img src="https://raw.githubusercontent.com/madzera/happytree/main/.github/resources/happytree_logo.png" alt="HappyTree Logo" class="logo">
+                <img src="https://raw.githubusercontent.com/madzera/happytree/main/.github/resources/happytree_logo_dark_mode.png" alt="HappyTree Logo" class="logo">
             </div>
             <button class="mobile-menu-toggle" aria-label="Toggle menu">
                 <span></span>
@@ -324,7 +324,7 @@ System.out.println(root.toJSON());</code></pre>
                     <h3>Wiki</h3>
                     <p>Tutorials, examples, and best practices</p>
                 </a>
-                <a href="../target/reports/apidocs/index.html" class="doc-card">
+                <a href="./javadoc/index.html" class="doc-card">
                     <div class="doc-icon">🔍</div>
                     <h3>JavaDoc</h3>
                     <p>Detailed API documentation</p>
@@ -520,6 +520,6 @@ for (Element&lt;Directory&gt; child : children) {
         </div>
     </footer>
 
-    <script src="happytree_script.js"></script>
+    <script src="happytree_scripts.js"></script>
 </body>
 </html>
