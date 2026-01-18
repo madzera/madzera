@@ -186,6 +186,14 @@
                     <span class="use-case-icon">🗺️</span>
                     <span>Menu Navigation</span>
                 </div>
+				<div class="use-case">
+                    <span class="use-case-icon">🏷️</span>
+                    <span>Taxonomy</span>
+                </div>
+				<div class="use-case">
+                    <span class="use-case-icon">📍</span>
+                    <span>Location Hierarchy</span>
+                </div>
             </div>
         </div>
     </section>
@@ -309,7 +317,7 @@ System.out.println(root.toJSON());</code></pre>
         <div class="container">
             <h2 class="section-title">Documentation & Resources</h2>
             <div class="docs-grid">
-                <a href="https://happytreeapi.vercel.app/happytree-2.0.0.pdf" target="_blank" class="doc-card">
+                <a href="https://www.madzera.com/happytree/happytree-2.0.0.pdf" target="_blank" class="doc-card">
                     <div class="doc-icon">📄</div>
                     <h3>Official Documentation</h3>
                     <p>Complete API reference and detailed guides</p>
@@ -336,11 +344,11 @@ System.out.println(root.toJSON());</code></pre>
     <!-- Code Example Section -->
     <section class="section code-example">
         <div class="container">
-            <h2 class="section-title">Complete Example</h2>
+            <h2 class="section-title">Quick Start</h2>
             <div class="example-tabs">
-                <button class="tab-button active" data-tab="complete">Full Example</button>
+                <button class="tab-button active" data-tab="complete">Usage</button>
                 <button class="tab-button" data-tab="operations">Operations</button>
-                <button class="tab-button" data-tab="export">Examples</button>
+                <button class="tab-button" data-tab="export">More Examples</button>
             </div>
             <div class="tab-content active" id="complete">
                 <div class="code-block">
@@ -357,7 +365,7 @@ public class Directory {
     // Constructors, getters, setters...
 }
 
-// 2. Create some data
+// 2. Create or retrieve data from a previous structure (DB)
 List&lt;Directory&gt; directories = Arrays.asList(
     new Directory(1, null, "Root"),
     new Directory(2, 1, "Documents"),
@@ -371,15 +379,15 @@ TreeManager manager = HappyTree.createTreeManager();
 TreeTransaction transaction = manager.getTransaction();
 transaction.initializeSession("fileSystem", directories);
 
-// 4. Work with the tree
-Element&lt;Directory&gt; documents = manager.getElementById(2);
+// 4. Retrieve the specific 'Pictures' and 'Personal' nodes
 Element&lt;Directory&gt; pictures = manager.getElementById(3);
+Element&lt;Directory&gt; personal = manager.getElementById(5);
 
-// Move 'Personal' under 'Pictures'
+// 5. Move 'Personal' from 'Documents' to 'Pictures'
 Element&lt;Directory&gt; personal = manager.getElementById(5);
 manager.cut(personal, pictures);
 
-// 5. Export the result
+// 6. Export the result in JSON format and print it
 Element&lt;Directory&gt; root = manager.root();
 String json = root.toJSON();
 System.out.println(json);</code></pre>
@@ -900,7 +908,7 @@ Files.write(Paths.get("tree-export.json"),
                     <h4>Links</h4>
                     <ul>
                         <li><a href="https://github.com/madzera/happytree">GitHub</a></li>
-                        <li><a href="https://happytreeapi.vercel.app/happytree-2.0.0.pdf">Documentation</a></li>
+                        <li><a href="https://www.madzera.com/happytree/happytree-2.0.0.pdf">Documentation</a></li>
                         <li><a href="https://github.com/madzera/happytree/wiki">Wiki</a></li>
                         <li><a href="https://github.com/madzera/happytree/issues">Issues</a></li>
                     </ul>
@@ -908,7 +916,7 @@ Files.write(Paths.get("tree-export.json"),
                 <div class="footer-section">
                     <h4>Resources</h4>
                     <ul>
-                        <li><a href="https://sonarcloud.io/dashboard?id=madzera_happytree">Code Quality</a></li>
+                        <li><a href="https://sonarcloud.io/summary/overall?id=madzera_happytree&branch=main">Code Quality</a></li>
                         <li><a href="https://github.com/madzera/happytree/releases">Releases</a></li>
                         <li><a href="https://mvnrepository.com/artifact/com.madzera/happytree">Maven Central</a></li>
                     </ul>

@@ -199,7 +199,7 @@ window.addEventListener('scroll', () => {
         navbar.style.backdropFilter = 'none';
     }
 });
-
+/*
 // ==================== Stats Counter Animation ====================
 function animateCounter(element, target, duration = 2000) {
     const start = 0;
@@ -240,7 +240,7 @@ const statsSection = document.querySelector('.stats');
 if (statsSection) {
     statsObserver.observe(statsSection);
 }
-
+*/
 // ==================== Keyboard Navigation ====================
 document.addEventListener('keydown', (e) => {
     // Press 'Escape' to close mobile menu
