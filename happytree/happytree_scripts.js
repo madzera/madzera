@@ -154,30 +154,30 @@ function addCopyButtons() {
                 copyButton.style.background = '#45a049';
                 
                 setTimeout(() => {
-                    copyButton.innerHTML = '📋 Copy';
+                    copyButton.innerHTML = '📋';
                     copyButton.style.background = '#4CAF50';
-                }, 2000);
+                }, 1000);
             } catch (err) {
                 console.error('Failed to copy code:', err);
                 copyButton.innerHTML = '✗ Failed';
                 copyButton.style.background = '#f44336';
                 
                 setTimeout(() => {
-                    copyButton.innerHTML = '📋 Copy';
+                    copyButton.innerHTML = '📋';
                     copyButton.style.background = '#4CAF50';
-                }, 2000);
+                }, 1000);
             }
         });
         
         // Hover effect
         copyButton.addEventListener('mouseenter', () => {
-            if (copyButton.innerHTML === '📋 Copy') {
+            if (copyButton.innerHTML === '📋') {
                 copyButton.style.background = '#45a049';
             }
         });
         
         copyButton.addEventListener('mouseleave', () => {
-            if (copyButton.innerHTML === '📋 Copy') {
+            if (copyButton.innerHTML === '📋') {
                 copyButton.style.background = '#4CAF50';
             }
         });

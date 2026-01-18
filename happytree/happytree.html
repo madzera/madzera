@@ -340,7 +340,7 @@ System.out.println(root.toJSON());</code></pre>
             <div class="example-tabs">
                 <button class="tab-button active" data-tab="complete">Full Example</button>
                 <button class="tab-button" data-tab="operations">Operations</button>
-                <button class="tab-button" data-tab="export">Export</button>
+                <button class="tab-button" data-tab="export">Examples</button>
             </div>
             <div class="tab-content active" id="complete">
                 <div class="code-block">
@@ -386,56 +386,460 @@ System.out.println(json);</code></pre>
                 </div>
             </div>
             <div class="tab-content" id="operations">
-                <div class="code-block">
-                    <pre><code class="language-java">// Common tree operations
+                <div class="operations-tables">
+                    <div class="interface-operations">
+                        <h3>Element</h3>
+                        <p class="interface-description">Represents a tree node - access data, navigate children, and export to JSON/XML</p>
+                        <table class="operations-table">
+                            <thead>
+                                <tr>
+                                    <th>Method</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>getId()</code></td>
+                                    <td>Obtains the element identifier. This identifier is unique within the tree session when attached to the tree</td>
+                                </tr>
+                                <tr>
+                                    <td><code>setId(Object id)</code></td>
+                                    <td>Sets the element identifier. The change requires updating the element to take effect. The identifier must be unique and nonnull</td>
+                                </tr>
+                                <tr>
+                                    <td><code>getParent()</code></td>
+                                    <td>Obtains the parent identifier of this element</td>
+                                </tr>
+                                <tr>
+                                    <td><code>setParent(Object parent)</code></td>
+                                    <td>Sets the parent identifier reference of this element. If null or nonexistent parent, the element will be at root level when persisted/updated</td>
+                                </tr>
+                                <tr>
+                                    <td><code>getChildren()</code></td>
+                                    <td>Obtains all child elements of the current element. This includes all descendants recursively</td>
+                                </tr>
+                                <tr>
+                                    <td><code>addChildren(Element&lt;T&gt; child)</code></td>
+                                    <td>Adds a new child element into the current element. If the child contains children, they will also be added</td>
+                                </tr>
+                                <tr>
+                                    <td><code>addChildren(Collection&lt;Element&lt;T&gt;&gt; children)</code></td>
+                                    <td>Adds a list of child elements to be contained in the current children list. Includes all nested children recursively</td>
+                                </tr>
+                                <tr>
+                                    <td><code>getElementById(Object id)</code></td>
+                                    <td>Searches within the current element for an element according to the @Id parameter. Returns null if not found. Search is performed recursively</td>
+                                </tr>
+                                <tr>
+                                    <td><code>removeChildren(Collection&lt;Element&lt;T&gt;&gt; children)</code></td>
+                                    <td>Removes a subset of elements within this one. All children and elements below the hierarchy are also removed recursively</td>
+                                </tr>
+                                <tr>
+                                    <td><code>removeChild(Element&lt;T&gt; child)</code></td>
+                                    <td>Removes the specified child element from the children list. All its children and elements below are also removed recursively</td>
+                                </tr>
+                                <tr>
+                                    <td><code>removeChild(Object id)</code></td>
+                                    <td>Removes the element from the children list by @Id. The element and all its children are removed</td>
+                                </tr>
+                                <tr>
+                                    <td><code>wrap(T object)</code></td>
+                                    <td>Encapsulates any object node within the element, as long as it has the same class type as other objects in the same tree session</td>
+                                </tr>
+                                <tr>
+                                    <td><code>unwrap()</code></td>
+                                    <td>Returns a copy of the object node wrapped in this element. Provides access to the encapsulated object</td>
+                                </tr>
+                                <tr>
+                                    <td><code>attachedTo()</code></td>
+                                    <td>Returns the TreeSession instance to which this element belongs. An element is always associated with a session</td>
+                                </tr>
+                                <tr>
+                                    <td><code>lifecycle()</code></td>
+                                    <td>Returns the current lifecycle state of this element (NOT_EXISTED, ATTACHED, or DETACHED)</td>
+                                </tr>
+                                <tr>
+                                    <td><code>toJSON()</code></td>
+                                    <td>Converts the whole element structure into a JSON format (minified). This includes all children recursively</td>
+                                </tr>
+                                <tr>
+                                    <td><code>toPrettyJSON()</code></td>
+                                    <td>Converts the whole element structure into a well-formatted JSON string. This includes all children recursively</td>
+                                </tr>
+                                <tr>
+                                    <td><code>toXML()</code></td>
+                                    <td>Converts the whole element structure into an XML string (minified). This includes all children recursively</td>
+                                </tr>
+                                <tr>
+                                    <td><code>toPrettyXML()</code></td>
+                                    <td>Converts the whole element structure into a well-formatted XML string. This includes all children recursively</td>
+                                </tr>
+                                <tr>
+                                    <td><code>search(Predicate&lt;Element&lt;T&gt;&gt; condition)</code></td>
+                                    <td>Searches for elements that satisfy a specific condition within this element and its children recursively. Returns a list of matching elements with their hierarchical structure preserved</td>
+                                </tr>
+                                <tr>
+                                    <td><code>apply(Consumer&lt;Element&lt;T&gt;&gt; action)</code></td>
+                                    <td>Applies a function to be performed on this element and all its children recursively. Changes are not automatically reflected and require persist/update operations</td>
+                                </tr>
+                                <tr>
+                                    <td><code>apply(Consumer&lt;Element&lt;T&gt;&gt; action, Predicate&lt;Element&lt;T&gt;&gt; condition)</code></td>
+                                    <td>Applies a function to be performed on elements that satisfy the specified condition within the element subtree. Changes require persist/update operations</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-// Get elements
-Element&lt;Directory&gt; element = manager.getElementById(id);
-Element&lt;Directory&gt; root = manager.root();
+                    <div class="interface-operations">
+                        <h3>TreeManager</h3>
+                        <p class="interface-description">Handles elements within tree sessions - create, update, move, copy, and query tree nodes</p>
+                        <table class="operations-table">
+                            <thead>
+                                <tr>
+                                    <th>Method</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>cut(Element&lt;T&gt; from, Element&lt;T&gt; to)</code></td>
+                                    <td>Cuts the source element to inside of the target element, whether for the same session or not (they must have the same object type). All children of the source element will be cut as well. If target is null, moves to root level</td>
+                                </tr>
+                                <tr>
+                                    <td><code>cut(Object from, Object to)</code></td>
+                                    <td>Cuts an element identified by its @Id and moves it inside another element within the same session. Returns null if the target element is not found. If the target element is null or not found, the source element is moved to the root level</td>
+                                </tr>
+                                <tr>
+                                    <td><code>copy(Element&lt;T&gt; from, Element&lt;T&gt; to)</code></td>
+                                    <td>Copies the source element into the target element in another tree session. The entire structure of the copied element will be pasted inside the target element. Copying within the same tree session would result in a duplicate @Id exception</td>
+                                </tr>
+                                <tr>
+                                    <td><code>removeElement(Element&lt;T&gt; element)</code></td>
+                                    <td>Removes the corresponding element from the tree session and returns the removed element. After removal, the element and all its children will have the NOT_EXISTED state</td>
+                                </tr>
+                                <tr>
+                                    <td><code>removeElement(Object id)</code></td>
+                                    <td>Removes the element by its @Id. All children of the found element are removed as well from the removed element itself. Returns null if @Id cannot be found</td>
+                                </tr>
+                                <tr>
+                                    <td><code>getElementById(Object id)</code></td>
+                                    <td>Returns the element given its @Id in the tree session. Returns null if the @Id is null or if the element cannot be found in the tree</td>
+                                </tr>
+                                <tr>
+                                    <td><code>containsElement(Element&lt;T&gt; parent, Element&lt;T&gt; descendant)</code></td>
+                                    <td>Verifies whether the parent element is inside of it the descendant element in the current session. Returns false if elements are null or not attached</td>
+                                </tr>
+                                <tr>
+                                    <td><code>containsElement(Object parent, Object descendant)</code></td>
+                                    <td>Verifies whether the parent element (identified by @Id) contains the descendant element (identified by @Id) within the current session. Returns false if either element is not found</td>
+                                </tr>
+                                <tr>
+                                    <td><code>containsElement(Element&lt;T&gt; element)</code></td>
+                                    <td>Verifies that the current tree session has the specified element. Returns false if element is null, not found, or not in ATTACHED state</td>
+                                </tr>
+                                <tr>
+                                    <td><code>containsElement(Object id)</code></td>
+                                    <td>Verifies that the current tree session has the specified element by the given @Id. Returns false if element is not found or @Id is null</td>
+                                </tr>
+                                <tr>
+                                    <td><code>createElement(Object id, Object parent, T wrappedNode)</code></td>
+                                    <td>Creates an element with the @Id, parent and the wrapped object node. Returns a new element with the NOT_EXISTED state in lifecycle. Must be persisted to be inserted to the tree</td>
+                                </tr>
+                                <tr>
+                                    <td><code>persistElement(Element&lt;T&gt; newElement)</code></td>
+                                    <td>Persists a new element into the current tree session. The new element must have a unique identifier and NOT_EXISTED state. Returns a copy with ATTACHED state</td>
+                                </tr>
+                                <tr>
+                                    <td><code>updateElement(Element&lt;T&gt; element)</code></td>
+                                    <td>Updates the state of the element within the tree. Returns a copy with ATTACHED state</td>
+                                </tr>
+                                <tr>
+                                    <td><code>getTransaction()</code></td>
+                                    <td>Obtains the TreeTransaction instance associated with this manager. Every operation defined in this interface needs to check the transaction</td>
+                                </tr>
+                                <tr>
+                                    <td><code>root()</code></td>
+                                    <td>Returns the root of the tree in the current session. The root encompasses all other elements and has no @Id, @Parent, or object wrapped node</td>
+                                </tr>
+                                <tr>
+                                    <td><code>search(Predicate&lt;Element&lt;T&gt;&gt; condition)</code></td>
+                                    <td>Searches for elements that satisfy a specific condition within the entire tree structure. Returns a list of elements (without their children) that match the condition</td>
+                                </tr>
+                                <tr>
+                                    <td><code>apply(Consumer&lt;Element&lt;T&gt;&gt; action)</code></td>
+                                    <td>Applies a function to be performed on all elements within the entire tree structure (except root). Changes are automatically reflected on the tree session</td>
+                                </tr>
+                                <tr>
+                                    <td><code>apply(Consumer&lt;Element&lt;T&gt;&gt; action, Predicate&lt;Element&lt;T&gt;&gt; condition)</code></td>
+                                    <td>Applies a function to be performed on elements that satisfy the specified condition within the entire tree structure (except root). Changes are automatically reflected on the tree session</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-// Check relationships
-boolean contains = manager.containsElement(parent, child);
-boolean isParent = manager.isParent(parent, child);
+                    <div class="interface-operations">
+                        <h3>TreeSession</h3>
+                        <p class="interface-description">Represents a tree instance - provides session identification and state</p>
+                        <table class="operations-table">
+                            <thead>
+                                <tr>
+                                    <th>Method</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>getSessionId()</code></td>
+                                    <td>Returns the session identifier name. A session identifier is defined when the session is initialized and must be unique</td>
+                                </tr>
+                                <tr>
+                                    <td><code>isActive()</code></td>
+                                    <td>Verifies whether the session is active. Returns true if the session is active (can be handled), false if deactivated (exists in memory but cannot be handled)</td>
+                                </tr>
+                                <tr>
+                                    <td><code>tree()</code></td>
+                                    <td>Returns the entire tree session structure, represented by the root element. From the root element, it is possible to navigate through all children recursively, accessing the entire tree structure</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-// Modify tree structure
-manager.cut(source, destination);      // Move element
-manager.copy(source, destination);     // Copy element
-manager.removeElement(element);        // Remove element
-
-// Create and add new elements
-Element&lt;Directory&gt; newElement = 
-    manager.createElement(id, parentId, directory);
-manager.persistElement(newElement);
-
-// Update existing elements
-directory.setDirectoryName("New Name");
-manager.updateElement(element);</code></pre>
+                    <div class="interface-operations">
+                        <h3>TreeTransaction</h3>
+                        <p class="interface-description">Manages tree sessions - initialize, activate, clone, and destroy sessions</p>
+                        <table class="operations-table">
+                            <thead>
+                                <tr>
+                                    <th>Method</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>initializeSession(String identifier, Class&lt;T&gt; type)</code></td>
+                                    <td>Initializes a new empty tree session with the specified identifier. Creates an empty tree where the API client must create elements one by one. The session is automatically checked out as the current session</td>
+                                </tr>
+                                <tr>
+                                    <td><code>initializeSession(String identifier, Collection&lt;T&gt; nodes)</code></td>
+                                    <td>Initializes a session with a specified identifier and transforms a list of linear objects (with logical tree structure) into an actual tree structure through the API Transformation Process. The session is automatically available as the current session</td>
+                                </tr>
+                                <tr>
+                                    <td><code>destroySession(String identifier)</code></td>
+                                    <td>Removes the session with the specified identifier permanently. The tree and its elements within this session are also removed and cannot be retrieved</td>
+                                </tr>
+                                <tr>
+                                    <td><code>destroySession()</code></td>
+                                    <td>Removes the current session permanently. The tree and its elements within this session are also removed. The API client needs to specify a new session to be checked out after removal</td>
+                                </tr>
+                                <tr>
+                                    <td><code>destroyAllSessions()</code></td>
+                                    <td>Removes all registered sessions permanently. The removal occurs for both activated and deactivated sessions</td>
+                                </tr>
+                                <tr>
+                                    <td><code>sessionCheckout(String identifier)</code></td>
+                                    <td>Selects a tree session to work with. The current session remains in the background while the checked-out session becomes the current session. Passing null for non-existent identifier cancels the current session</td>
+                                </tr>
+                                <tr>
+                                    <td><code>activateSession(String identifier)</code></td>
+                                    <td>Activates a session by the specified identifier. With an active session, its elements can be handled freely within the tree. It does not automatically make it as the current session</td>
+                                </tr>
+                                <tr>
+                                    <td><code>activateSession()</code></td>
+                                    <td>Activates the current session. With an active session, its elements can be handled freely within the tree. The session will always be active after invoking this method</td>
+                                </tr>
+                                <tr>
+                                    <td><code>deactivateSession(String identifier)</code></td>
+                                    <td>Deactivates a session by the specified identifier. The session is just disabled but not removed. With a deactivated session, its elements cannot be handled</td>
+                                </tr>
+                                <tr>
+                                    <td><code>deactivateSession()</code></td>
+                                    <td>Deactivates the current session. The session is just disabled but not removed from the list of registered sessions. With a deactivated session, its elements cannot be handled</td>
+                                </tr>
+                                <tr>
+                                    <td><code>sessions()</code></td>
+                                    <td>Returns the list of all registered sessions. The list includes both activated and deactivated sessions</td>
+                                </tr>
+                                <tr>
+                                    <td><code>cloneSession(String from, String to)</code></td>
+                                    <td>Replicates the tree session defined by the "from" identifier to the session defined by the "to" identifier. Faithfully reproduces all elements from source tree to target tree. If target exists, it is replaced. It does not automatically check out the cloned session after the cloning process ends</td>
+                                </tr>
+                                <tr>
+                                    <td><code>cloneSession(TreeSession from, String to)</code></td>
+                                    <td>Replicates the tree session defined by the "from" session instance to the session defined by the "to" identifier. Faithfully reproduces all elements from source tree to target tree. If target exists, it is replaced. It does not automatically check out the cloned session after the cloning process ends</td>
+                                </tr>
+                                <tr>
+                                    <td><code>currentSession()</code></td>
+                                    <td>Returns the current session of the transaction. The current session is the one that the transaction is referring to at this moment. Returns null if no session is checked out</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
             <div class="tab-content" id="export">
-                <div class="code-block">
-                    <pre><code class="language-java">// Export tree to different formats
+                <h3 style="text-align: center; margin-bottom: 2rem; color: var(--text-dark);">Practical Usage Examples</h3>
+                
+                <!-- Example 1: Moving Elements -->
+                <div style="margin-bottom: 3rem;">
+                    <h4 style="color: var(--primary-color); margin-bottom: 1rem;">1. Moving Elements Between Parents</h4>
+                    <p style="color: var(--text-muted); margin-bottom: 1rem;">Reorganize your tree structure by moving elements to different parents.</p>
+                    <div class="code-block">
+                        <pre><code class="language-java">// Initialize tree with directories
+TreeManager manager = HappyTree.createTreeManager();
+TreeTransaction transaction = manager.getTransaction();
+transaction.initializeSession("fileSystem", directories);
 
-// Get the root or any element
+// Get elements
+Element&lt;Directory&gt; personal = manager.getElementById(5);
+Element&lt;Directory&gt; pictures = manager.getElementById(3);
+
+// Move 'Personal' folder under 'Pictures'
+manager.cut(personal, pictures);
+
+// Verify the move
+assertTrue(manager.containsElement(pictures, personal));
+System.out.println("Folder moved successfully!");</code></pre>
+                    </div>
+                </div>
+
+                <!-- Example 2: Creating Elements Dynamically -->
+                <div style="margin-bottom: 3rem;">
+                    <h4 style="color: var(--primary-color); margin-bottom: 1rem;">2. Creating and Persisting New Elements</h4>
+                    <p style="color: var(--text-muted); margin-bottom: 1rem;">Build trees dynamically by creating new elements from scratch.</p>
+                    <div class="code-block">
+                        <pre><code class="language-java">// Create empty tree session
+transaction.initializeSession("newTree", Directory.class);
+
+// Create new directory object
+Directory security = new Directory();
+security.setDirectoryId(100);
+security.setDirectoryParentId(null);
+security.setDirectoryName("Security");
+
+// Wrap in Element and persist
+Element&lt;Directory&gt; securityElement = 
+    manager.createElement(100, null, security);
+securityElement = manager.persistElement(securityElement);
+
+// Element is now part of the tree
+assertEquals("ATTACHED", securityElement.lifecycle());
+System.out.println("New element created: " + security.getDirectoryName());</code></pre>
+                    </div>
+                </div>
+
+                <!-- Example 3: Searching with Predicates -->
+                <div style="margin-bottom: 3rem;">
+                    <h4 style="color: var(--primary-color); margin-bottom: 1rem;">3. Searching Elements with Conditions</h4>
+                    <p style="color: var(--text-muted); margin-bottom: 1rem;">Find specific elements using predicates and functional programming.</p>
+                    <div class="code-block">
+                        <pre><code class="language-java">// Search for directories containing "Doc"
+List&lt;Element&lt;Directory&gt;&gt; results = manager.search(element -> {
+    Directory dir = element.unwrap();
+    return dir.getDirectoryName().contains("Doc");
+});
+
+// Process results
+results.forEach(element -> {
+    Directory dir = element.unwrap();
+    System.out.println("Found: " + dir.getDirectoryName());
+});
+
+// Search within a specific element
+Element&lt;Directory&gt; root = manager.root();
+List&lt;Element&lt;Directory&gt;&gt; children = root.search(e -> 
+    e.getChildren().size() > 2
+);</code></pre>
+                    </div>
+                </div>
+
+                <!-- Example 4: Applying Operations to All Elements -->
+                <div style="margin-bottom: 3rem;">
+                    <h4 style="color: var(--primary-color); margin-bottom: 1rem;">4. Bulk Operations with Apply</h4>
+                    <p style="color: var(--text-muted); margin-bottom: 1rem;">Apply transformations to multiple elements at once.</p>
+                    <div class="code-block">
+                        <pre><code class="language-java">// Apply operation to all elements in tree
+manager.apply(element -> {
+    Directory dir = element.unwrap();
+    // Add prefix to all directory names
+    dir.setDirectoryName("[ARCHIVED] " + dir.getDirectoryName());
+    element.wrap(dir);
+});
+
+// Apply only to elements matching condition
+manager.apply(
+    element -> {
+        Directory dir = element.unwrap();
+        dir.setDirectoryName(dir.getDirectoryName().toUpperCase());
+        element.wrap(dir);
+    },
+    element -> element.getChildren().size() == 0 // Only leaf nodes
+);
+
+// Changes are automatically reflected in the tree
+System.out.println("Bulk update completed!");</code></pre>
+                    </div>
+                </div>
+
+                <!-- Example 5: Multiple Sessions -->
+                <div style="margin-bottom: 3rem;">
+                    <h4 style="color: var(--primary-color); margin-bottom: 1rem;">5. Working with Multiple Sessions</h4>
+                    <p style="color: var(--text-muted); margin-bottom: 1rem;">Manage multiple independent trees simultaneously.</p>
+                    <div class="code-block">
+                        <pre><code class="language-java">TreeManager manager = HappyTree.createTreeManager();
+TreeTransaction transaction = manager.getTransaction();
+
+// Initialize multiple sessions
+transaction.initializeSession("personal", personalDirs);
+transaction.initializeSession("work", workDirs);
+
+// Switch between sessions
+transaction.sessionCheckout("personal");
+Element&lt;Directory&gt; personalRoot = manager.root();
+
+transaction.sessionCheckout("work");
+Element&lt;Directory&gt; workRoot = manager.root();
+
+// Copy element between sessions
+Element&lt;Directory&gt; project = manager.getElementById(42);
+manager.copy(project, personalRoot);
+
+// Clone entire session
+transaction.cloneSession("work", "work-backup");
+System.out.println("Session cloned successfully!");</code></pre>
+                    </div>
+                </div>
+
+                <!-- Example 6: Export to JSON/XML -->
+                <div style="margin-bottom: 3rem;">
+                    <h4 style="color: var(--primary-color); margin-bottom: 1rem;">6. Exporting Tree Structures</h4>
+                    <p style="color: var(--text-muted); margin-bottom: 1rem;">Convert your tree to JSON or XML format for serialization.</p>
+                    <div class="code-block">
+                        <pre><code class="language-java">// Get root element
 Element&lt;Directory&gt; root = manager.root();
 
-// Export to JSON
+// Export to minified JSON
 String json = root.toJSON();
 System.out.println(json);
 
-// Export to XML (if supported)
-// Note: Check documentation for XML export options
+// Export to formatted JSON (readable)
+String prettyJson = root.toPrettyJSON();
+System.out.println(prettyJson);
 
-// Custom serialization
-// You can unwrap elements to access original objects
-Directory originalObject = root.unwrap();
+// Export to XML
+String xml = root.toXML();
+System.out.println(xml);
 
-// Iterate through children
-Collection&lt;Element&lt;Directory&gt;&gt; children = root.getChildren();
-for (Element&lt;Directory&gt; child : children) {
-    Directory dir = child.unwrap();
-    System.out.println(dir.getDirectoryName());
-}</code></pre>
+// Export formatted XML
+String prettyXml = root.toPrettyXML();
+
+// Export specific subtree
+Element&lt;Directory&gt; documents = manager.getElementById(2);
+String subtreeJson = documents.toPrettyJSON();
+
+// Save to file
+Files.write(Paths.get("tree-export.json"), 
+    prettyJson.getBytes(StandardCharsets.UTF_8));</code></pre>
+                    </div>
                 </div>
             </div>
         </div>
@@ -490,7 +894,7 @@ for (Element&lt;Directory&gt; child : children) {
                 <div class="footer-section">
                     <h3>HappyTree API</h3>
                     <p>A Java API for tree structure management</p>
-                    <p class="copyright">© 2026 MadZera</p>
+                    <p class="copyright">© 2020-2026 MadZera</p>
                 </div>
                 <div class="footer-section">
                     <h4>Links</h4>
